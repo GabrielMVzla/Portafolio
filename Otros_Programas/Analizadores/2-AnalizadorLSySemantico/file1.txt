@@ -1,0 +1,28 @@
+class hola 
+
+float v1;
+int v2;
+int v3;
+boolean v4;
+{
+	v4 = v4 + false;
+	System.in.readln(v2 - v3);
+	do 
+	
+		v2 = v2 + 43;
+		System.in.readln(v2 * v3);
+		System.in.readln(v2 + v3);
+		
+		v3 = v2 - 43;
+		
+		do
+			v3 = v3 * 33;
+		
+		until (v2 < v3);	
+		
+	until (v2 < 55);	
+	
+	System.in.readln(v2 * v3);
+	
+	v1 = v1 + -0.4;
+}

@@ -1,0 +1,11 @@
+if 4 = 5 then 
+begin
+	if 0 = 0 then 
+		print 2 = 2;
+	else 
+	begin
+		print 3 = 3;
+	end
+end
+else
+	print 1 = 1;

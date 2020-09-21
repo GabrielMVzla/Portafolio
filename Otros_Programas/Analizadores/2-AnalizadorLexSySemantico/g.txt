@@ -1,0 +1,27 @@
+class hola 
+
+boolean m;
+float a;
+int j;
+int l;
+float r;
+boolean y;
+
+
+{
+	j = 22;
+	System.in.readln(y);
+	
+	do
+		j = l + j;
+		
+		do 
+	
+			j =  l+ 22;		
+			r = -55.984;
+			System.in.readln(true);
+		until( a < r );
+		
+	until (true);		
+		
+}

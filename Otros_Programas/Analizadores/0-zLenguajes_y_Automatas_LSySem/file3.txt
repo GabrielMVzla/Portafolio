@@ -1,0 +1,6 @@
+begin
+	 
+    print 0 = 777;
+
+end
+end

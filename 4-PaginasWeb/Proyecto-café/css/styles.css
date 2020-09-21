@@ -1,0 +1,464 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+
+html {
+	box-sizing: border-box;
+	font-size: 65.5%; /**1 rem igual a 10px**/
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	/*font-family: "PT Sans", sans-serif;*/
+	font-family: "Open Sans", sans-serif;
+	font-size: 1.6rem;
+	line-height: 2; /*los interlineados no necesitan "rem*/
+}
+
+/**Globales**/
+.contenedor {
+	max-width: 120rem;
+	width: 95%; /*para dejar un pequeño margen si es que nuestra pagina toma toda la pantalla, esto no facilita la lectura*/
+	margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: "PT Sans", sans-serif;
+}
+
+h1 {
+	font-size: 4.8rem;
+}
+h2 {
+	font-size: 4rem;
+	line-height: 1.2;
+}
+h3 {
+	font-size: 3.2rem;
+}
+h4 {
+	font-size: 2.8rem;
+}
+img {
+	max-width: 100%; /*esto lo utilizamos para que las imagenes se adapten en su contenedor*/
+}
+/**Utilidades*/
+.centrar-texto {
+	text-align: center;
+}
+.no-margin {
+	margin: 0;
+}
+
+/** Grid **/
+
+@media (min-width: 768px) {
+	/*en un dispositivo pequeño nuestro grid no va a hacer nada, solamente en un dispositivo más grande*/
+	.grid {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	.centrar-columnas {
+		justify-content: center;
+	}
+	.columnas-4 {
+		flex: 0 0 calc(33.3% - 1rem);
+	}
+	.columnas-6 {
+		flex: 0 0 calc(50% - 1rem); /*(50%-1rem)*/
+		/*margin-right: 2rem;*/
+	}
+	.columnas-8 {
+		flex: 0 0 calc(66.6% - 1rem);
+	}
+	.columnas-10 {
+		flex: 0 0 cal(83.3% - 1rem);
+	}
+
+	.columnas-12 {
+		flex: 0 0 100%;
+	}
+}
+
+/** Botones **/
+.btn {
+	display: block;
+	text-align: center;
+	padding: 1rem 3rem;
+	/*margin-top: 2rem;*/
+	/*nos dimos cuenta que quedaba pegado entonces quitamos este mrgin*/
+	margin: 2rem 0;
+	color: #fff;
+	text-decoration: none;
+	font-family: "PT Sans", sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	font-size: 2rem;
+	flex: 0 0 100%;
+}
+.btn:hover {
+	cursor: pointer;
+}
+@media (min-width: 768px) {
+	.btn {
+		display: inline-block;
+		flex: 0 0 auto;
+	}
+}
+.btn-primario {
+	background-color: #000;
+}
+.btn-secundario {
+	background-color: #784d3c;
+}
+
+/**Header**/
+@media (min-width: 768px) {
+	.barra {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+/*en esta parte creamos un css.json, nuestro propio snippet, es como un atajo el cual funciona con "mq"
+.m-top {
+	padding-top: 12rem;
+}*/
+.site-header {
+	background-image: url(../img/banner.jpg);
+	background-repeat: no-repeat;
+	/*por default todas las imagenes se repiten como en el 1er ej. que hice, con esto no se repetirán*/
+	background-position: center center; /*para que la img se despliegue desde el centro*/
+	background-size: cover; /*para que se llene tanto la altura como lo ancho*/
+	height: 60rem;
+}
+.site-header a {
+	color: #fff;
+	text-decoration: none;
+}
+.site-header h1 {
+	text-align: center;
+	font-weight: 400;
+}
+.site-header h1 span {
+	font-weight: 700;
+}
+/**Navegación**/
+.navegacion a {
+	text-align: center;
+	display: block;
+	font-size: 1.8rem;
+	color: #fff;
+	text-decoration: none;
+}
+@media (min-width: 768px) {
+	/*esta parte es para un dispositivo tablet, en el ejemplo a profesor se le acomodo en forma de cascada
+    su barra de navegación y utilizamos este codigo para que esté de manera horizontal y no vertical*/
+	.navegacion a {
+		display: inline;
+		margin-right: 2rem;
+	}
+	.navegacion a:last-of-type {
+		margin: 0;
+	}
+}
+
+.seccion {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+/**Header texto*/
+
+.texto-header {
+	color: #fff;
+	text-align: center;
+	margin-top: 5rem;
+}
+.texto-header-contacto {
+	color: rgb(37, 37, 37);
+	text-align: center;
+	-webkit-text-stroke: 0.4px;
+	-webkit-text-stroke-color: #fff;
+	font-size: 2rem;
+	display: block;
+
+}
+@media (min-width: 768px) {
+	.texto-header-contacto {
+		font-weight: 10rem;
+		color: rgb(37, 37, 37);
+		text-align: center;
+		-webkit-text-stroke: .5px;
+		-webkit-text-stroke-color: #fff;
+		font-size: 4rem;
+		height: auto;
+	}
+	.m-top {
+		padding-top: 12rem;
+	}
+}
+@media (min-width: 768px) {
+	.texto-header {
+		margin-top: 15rem;
+	}
+}
+.texto-header p {
+	font-size: 2.2rem;
+}
+
+.barra a {
+	text-decoration: none;
+}
+.barra a:hover {
+	color: green;
+	/*cursor: grab;  este solo fue para probar*/
+}
+.verde:hover {
+	color: green;
+}
+/** Contenido Principal HOME**/
+.contenido-principal {
+	display: flex;
+	flex-wrap: wrap;
+}
+.blog,
+.cursos {
+	/*flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 100%;
+  Estos 3 y el de abajo es lo mismo*/
+
+	flex: 0 0 100%;
+}
+
+.cursos {
+	order: -1; /*con esto podemos cambiar el orden de los factores, si nos damos cuenta 
+  el padre de ambos "cursos y blog" tiene primero blog y luego cursos, pero con esto 
+  podemos modificarlos sin cambiar el html*/
+}
+@media (min-width: 768px) {
+	.contenido-principal {
+		justify-content: space-between;
+	}
+	.blog {
+		flex-basis: 66.6%;
+		/*order: -1;*/
+	}
+	.cursos {
+		flex-basis: calc(33.3% - 4rem);
+		/*o aquí order: 2;*/
+		order: 2;
+	}
+}
+
+/** Opcional**/
+.entrada-blog {
+	margin-bottom: 2rem;
+	border-bottom: 1px solid #e1e1e1;
+}
+.entrada-blog:last-of-type {
+	border-bottom: none;
+}
+
+.entrada-blog {
+	display: inline-block;
+	justify-content: space-between;
+}
+
+.entrada-blog .imagen {
+	flex: 0 0 40%;
+	text-align: center;
+}
+.margen-img{
+	margin-top: 2rem;
+}
+.margen-pto5rem {
+	margin-top: 0.5rem;
+}
+.entrada-blog .contenido-blog 
+{
+	flex: 0 0 calc(60% - 2rem);
+  /*flex: 0 0 calc(60% - 2rem);*/
+  
+}
+
+/**Cursos Sidebar**/
+.cursos-lista {
+	padding: 0;
+	list-style: none;
+}
+
+.curso {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+	border-bottom: 1px solid #e1e1e1;
+}
+.curso:last-of-type {
+	border-bottom: none;
+}
+.curso p {
+	font-family: "PT Sans", sans-serif;
+	font-weight: 700;
+	font-size: 2rem;
+}
+.curso p span,
+.curso p.descripcion {
+	font-weight: 400;
+}
+
+/** Footer **/
+.site-footer {
+	background-color: #000;
+	padding: 3rem;
+	margin-top: 4rem;
+}
+.contenedor-footer {
+	padding: 3rem 0;
+	display: flex;
+	justify-content: space-between;
+}
+.site-footer p {
+	color: #fff;
+	font-size: 4rem;
+	font-weight: 400;
+	font-family: "PT Sans", Sans-serif;
+	text-align: center;
+}
+.site-footer p span {
+	font-weight: 700;
+}
+.copyright {
+	margin: 0;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+}
+@media (min-width: 768px) {
+	/*esta parte es para un dispositivo tablet, en el ejemplo a profesor se le acomodo en forma de cascada
+    su barra de navegación y utilizamos este codigo para que esté de manera horizontal y no vertical*/
+	.copyright {
+		margin: 0;
+	color: #fff;
+
+	display: flex;
+	justify-content: flex-end;
+	}
+
+}
+.copy-font p {
+	font-size: 1.8rem;
+}
+/**CONTACTO**/
+.columnas-10-fuera {
+	flex: 0 0 calc(83.3% - 1rem);
+}
+.columnas-12-fuera {
+	flex: 0 0 100%;
+}
+
+.formulario-contacto {
+	background-color: #fff;
+	padding: 5rem;
+}
+
+@media (min-width: 768px) {
+	.formulario-contacto {
+		margin-top: -10rem;
+	}
+}
+.formulario-contacto .campo {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+}
+.formulario-contacto .campo label {
+	flex: 0 0 8rem;
+}
+.formulario-contacto .campo input:not([type="submit"]),
+.formulario-contacto textarea {
+	flex: 1;
+	border: 1px solid #e1e1e1;
+	padding: 1rem;
+}
+
+.formulario-contacto textarea {
+	height: 20rem;
+}
+
+.formulario-contacto .enviar {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.esconder {
+	display: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+	display: none;
+}
+
+.buscador {
+	margin: 10px 0px;
+}
+
+.buscador label {
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.buscador input {
+	padding: 10px 10px;
+	width: 100%;
+}
+
+.contenedor a {
+	text-decoration: none;
+}
+
+.redes-sociales img {
+	width: 40px;
+}
+
+.redes-sociales a {
+	text-decoration: none;
+}
+
+.site-footer {
+	background-color: black;
+}
+
+.div-sociales li {
+	display: inline-block;
+	list-style: none;
+}
+
+.div-sociales ul {
+	padding: 0;
+	text-align: center;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.imagenBlog {
+	text-align: center;
+}
+
+.imagenBlog img {
+	max-width: 500px;
+}
+
+/*MAX WIDTH 100%; esto lo utilizamos para que las imagenes se adapten en su contenedor
+TEXT ALIGN: CENTER nos sirve para tener el centro centralizado
+  --para crear un background con img en el url no es necesario poner comillas
+  TEXT DECORATION: NONE  podemos quitar el sublineado que contienen los enlaces tipo <a>
+  ALIGN ITEMS sirve para acomodar los items de ese contenedor pero en manera vertical
+  BACKGROUND SIZE: COVER importante para que llene la altura y ancho de una img y verla completa
+  BORDER BOTTOM: 1px solid #e1e1e1; para poner una line de separación, solo visual
+  */

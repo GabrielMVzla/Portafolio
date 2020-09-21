@@ -1,0 +1,10 @@
+begin
+
+	if 2 = 2 then
+		print 2 = 2;
+	else	
+ begin then
+end
+
+
+

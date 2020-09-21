@@ -1,0 +1,18 @@
+public class hola1
+{
+	private int a2;
+	public boolean falso001 = false;
+	
+	if(a1 != b1)
+	{
+		a20 = 2 - 4;
+		a2 = 12 + 98;
+		while(n2 == bas4)
+		{
+			boolean b1 = 25;
+			int a1 = 12;
+			private int a20;
+			while( var1 <= var2){}
+		}
+	}
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans:400,700&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="css/normalize.css" />
+		<link rel="stylesheet" href="css/styles.css" />
+
+		<title>Café</title>
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="contenedor">
+				<div class="barra">
+					<a href="index.html">
+						<h1 class="no-margin">Blog<span>DeCafé</span></h1>
+						<!--un truco para hacer el título como en la img del primer proyecto-->
+					</a>
+					<nav class="navegacion">
+						<a href="nosotros.html">Nosotros</a>
+						<a href="cursos.html">Cursos</a>
+						<a href="contacto.html">Contacto</a>
+						<a href="localizacion.html">Localización</a>
+					</nav>
+				</div>
+				<!--barra-->
+				<div class="texto-header">
+					<h2 class="no-margin m-top">
+						Blog de Café con consejos y cursos
+					</h2>
+					<p class="no-margin">
+						Aprende de los expertos con las mejores recetas y consejos
+					</p>
+				</div>
+			</div>
+			<!--contenedor-->
+		</header>
+
+		<main class="contenedor">
+			<h2 class="centrar-texto">Nuestro Próximos Cursos y Talleres</h2>
+			<article class="curso grid">
+				<div class="columnas-4">
+					<img src="img/curso1.jpg" alt="Imagen Curso" />
+				</div>
+				<div class="columnas-8">
+					<h4 class="no-margin">Técnicas de extracción de café</h4>
+					<p class="no-margin">Fecha: <span>01 de Agosto de 2020</span></p>
+					<p class="no-margin">Precio: <span>Gratis</span></p>
+					<p class="no-margin">Cupo: <span>20</span></p>
+					<p>
+						<!--también podriamos agregar una clase a <p class "fw-400"> sin embargo no se aplicará porque el otro selector
+              con una sola etique, es más pesado que el .descripcion .curso p > .descripcion, entonces podemos hacerlo más 
+            especifico con .curso p.descripcion -->
+						<span>
+							Donec id interdum ligula. Cras a vestibulum magna. Ut pharetra magna sed elit pellentesque rhoncus. Integer iaculis sodales placerat. Ut hendrerit sit amet tellus eget interdum. Cras
+							consectetur ex nec enim ultricies, at lobortis mi malesuada. Phasellus ut tortor nec enim bibendum dictum. In eu mollis massa.
+						</span>
+					</p>
+				</div>
+			</article>
+
+			<article class="curso grid">
+				<div class="columnas-4">
+					<img src="img/curso2.jpg" alt="Imagen Curso" />
+				</div>
+				<div class="columnas-8">
+					<h4 class="no-margin">Taller para tostar y moler granos</h4>
+					<p class="no-margin">Fecha: <span>07 de Agosto de 2020</span></p>
+					<p class="no-margin">Precio: <span>Gratis</span></p>
+					<p class="no-margin">Cupo: <span>20</span></p>
+					<p>
+						<!--también podriamos agregar una clase a <p class "fw-400"> sin embargo no se aplicará porque el otro selector
+                  con una sola etique, es más pesado que el .descripcion .curso p > .descripcion, entonces podemos hacerlo más 
+                especifico con .curso p.descripcion -->
+						<span>
+							Donec id interdum ligula. Cras a vestibulum magna. Ut pharetra magna sed elit pellentesque rhoncus. Integer iaculis sodales placerat. Ut hendrerit sit amet tellus eget interdum. Cras
+							consectetur ex nec enim ultricies, at lobortis mi malesuada. Phasellus ut tortor nec enim bibendum dictum. In eu mollis massa.
+						</span>
+					</p>
+				</div>
+			</article>
+
+			<article class="curso grid">
+				<div class="columnas-4">
+					<img src="img/curso3.jpg" alt="Imagen Curso" />
+				</div>
+				<div class="columnas-8">
+					<h4 class="no-margin">
+						Taller 4 recetas de café para principiantes
+					</h4>
+					<p class="no-margin">Fecha: <span>09 de Agosto de 2020</span></p>
+					<p class="no-margin">Precio: <span>Gratis</span></p>
+					<p class="no-margin">Cupo: <span>20</span></p>
+					<p>
+						<!--también podriamos agregar una clase a <p class "fw-400"> sin embargo no se aplicará porque el otro selector
+                      con una sola etique, es más pesado que el .descripcion .curso p > .descripcion, entonces podemos hacerlo más 
+                    especifico con .curso p.descripcion -->
+						<span>
+							Donec id interdum ligula. Cras a vestibulum magna. Ut pharetra magna sed elit pellentesque rhoncus. Integer iaculis sodales placerat. Ut hendrerit sit amet tellus eget interdum. Cras
+							consectetur ex nec enim ultricies, at lobortis mi malesuada. Phasellus ut tortor nec enim bibendum dictum. In eu mollis massa.
+						</span>
+					</p>
+				</div>
+			</article>
+		</main>
+
+		<footer class="site-footer">
+			<div class="contenedor">
+				<div class="barra">
+					<a href="index.html">
+						<p class="no-margin verde">Blog<span>DeCafé</span></p>
+					</a>
+					<nav class="navegacion">
+						<a href="nosotros.html">Nosotros</a>
+						<a href="cursos.html">Cursos</a>
+						<a href="contacto.html">Contacto</a>
+						<a href="localizacion.html">Localización</a>
+					</nav>
+				</div>
+				<div class="div-sociales">
+					<ul class="redes-sociales">
+						<li>
+							<a href="https://facebook.com" target="blank">
+								<img src="img/facebook.png" />
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com" target="blank">
+								<img src="img/twitter.png" />
+							</a>
+						</li>
+						<li>
+							<a href="https://www.instagram.com/" target="blank">
+								<img src="img/instagram.png" />
+							</a>
+						</li>
+						<li>
+							<a href="https://gmail.com" target="blank">
+								<img src="img/gmail.png" />
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="blank">
+								<img src="img/youtube.png" alt="" />
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="copy-font">
+					<p class="copyright">
+						Todos los Derechos Reservados 2020&copy;
+					</p>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

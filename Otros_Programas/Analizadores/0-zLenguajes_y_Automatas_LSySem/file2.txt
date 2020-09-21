@@ -1,0 +1,36 @@
+hola()
+begin
+
+	int y = 98834;	int y = 5;
+	int x; 			boolean ehhcabeza = true; 
+	boolean falso = false; 
+	int l = b + c + d+m+d+6;
+	int a = M + b; 	boolean youtuber;
+	
+	boolean falso2 = false; 
+	boolean falso2 = true; 
+	
+	
+	if(m * true - h != a + b / c) then
+		a = otroValor;
+	else 
+		a = valor;	
+		
+	int b = 6;
+	int cont = 0;
+	cont = 23;
+	
+	print(a);
+	
+	if(false) then
+		print(d);
+	else 
+		if (b >= c) then
+			if (b > c) then
+				print(c);
+			else
+				print(b);
+		else
+			print(a);
+		
+end
