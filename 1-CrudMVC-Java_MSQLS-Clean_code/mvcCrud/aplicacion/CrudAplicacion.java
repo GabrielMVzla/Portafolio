@@ -1,4 +1,3 @@
-//Gabriel Montes
 package aplicacion;
 
 import controlador.CrudControlador;
@@ -22,5 +21,6 @@ public class CrudAplicacion
 		CrudControlador Controlador = new CrudControlador(VistaI, Modelo, VistaConsulta, Modelo.getEstado());
 		
 		VistaI.setControlador(Controlador);
+		VistaConsulta.setControlador(Controlador);
 	}
 }

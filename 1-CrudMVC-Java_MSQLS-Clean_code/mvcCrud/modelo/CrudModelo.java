@@ -1,5 +1,6 @@
 package modelo;
 
+import java.awt.Dimension;
 import java.sql.SQLException;
 
 import base_de_datos.CrudBD;
@@ -101,9 +102,9 @@ public class CrudModelo
 	}
 	
 	//OBTIENE LOS REGISTROS PARA LA TABLA DE LA VISTA CONSULTA
-	public ObjetoArrayConsulta consulta() 
+	public ObjetoArrayConsulta consulta(int puntoPartidaConsulta) 
 	{
-		return bd.tablaConsulta(); //retornamos un objeto con un mensaje (si hay error o no) y un objeto donde están los datos de los usuarios
+		return bd.tablaConsulta(puntoPartidaConsulta); //retornamos un objeto con un mensaje (si hay error o no) y un objeto donde están los datos de los usuarios
 	}
 	
 	private String casteo(String datoRFC)
@@ -150,5 +151,38 @@ public class CrudModelo
 		
 		return mensajeError; //si al final mensajeError queda como "0" es decir que no hubo error
 	}
+	
+	//calculo para el incremento de tamaño de fuente en la vista principal
+	public int calculoIncremento(Dimension dimensionInicial, Dimension dimensionActual) 
+	{
+		int incrementoHasta = 40;
+		
+		int incrementoIniAncho = 0, incrementoIniAlto = 0;
+		int incrementoActAncho = 0, incrementoActAlto = 0;
+		
+		//medidas base
+		incrementoIniAlto = dimensionInicial.height/incrementoHasta;
+		incrementoIniAncho = dimensionInicial.width/incrementoHasta;
+		//medidas actuales
+		incrementoActAlto = dimensionActual.height/incrementoHasta;
+		incrementoActAncho = dimensionActual.width/incrementoHasta;
+		
+		int diferenciaAlto = incrementoActAlto - incrementoIniAlto;
+		int diferenciaAncho = incrementoActAncho - incrementoIniAncho;
+		
+		if(diferenciaAlto >= 1 && diferenciaAncho >= 1)
+		{
+			if(diferenciaAlto >= diferenciaAncho)
+			{
+				return diferenciaAlto;
+			}
+			else 
+			{
+				return diferenciaAncho;
+			}
+		}
+		return 0;
+	}
+	
 	
 }

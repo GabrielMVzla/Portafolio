@@ -1,7 +1,10 @@
 package controlador;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -13,7 +16,7 @@ import objetos.ObjetoMensajePersonaRFC;
 import vistas.CrudVistaConsulta;
 import vistas.CrudVistaInicio;
 
-public class CrudControlador implements ActionListener
+public class CrudControlador implements ActionListener, ComponentListener
 {
 	private CrudVistaInicio Vista; 
 	private CrudModelo Modelo;
@@ -89,14 +92,13 @@ public class CrudControlador implements ActionListener
 			{
 				Vista.muestraExitoError(recuperado.getMensaje());
 				Vista.limpiarPantalla();
+				return;
 			}
-			else
-			{
-				Vista.txtNombre.setText(recuperado.getDatos().getNombre());
-				Vista.txtEdad.setText(String.valueOf(recuperado.getDatos().getEdad()));
-				Vista.txtIdCiudad.setText(String.valueOf(recuperado.getDatos().getIdCiudad()));
-			}
-		
+			
+			Vista.txtNombre.setText(recuperado.getDatos().getNombre());
+			Vista.txtEdad.setText(String.valueOf(recuperado.getDatos().getEdad()));
+			Vista.txtIdCiudad.setText(String.valueOf(recuperado.getDatos().getIdCiudad()));
+			
 			return;
 		}
 		if(b == Vista.btnModificar)
@@ -141,18 +143,50 @@ public class CrudControlador implements ActionListener
 		if(b == Vista.btnConsultar)
 		{
 			//obtenemos el dato tipo ObjetoArrayConsulta
-			ObjetoArrayConsulta recuperado = Modelo.consulta();
+			ObjetoArrayConsulta recuperado = Modelo.consulta(0); //valor Cero, puntoPartidaConsulta comenzará 0 cuando se llama desde aquí
 			
 			if(!recuperado.getMensaje().equals(mensajeConsultado))//si no es "recuperado" (msj esperado) lanzará una ventana de error desde la Vista
-				Vista.muestraExitoError(recuperado.getMensaje());
-			else
 			{
-				VistaConsulta.eliminar();
-				// creamos un nuevo objeto para que desde la vista nos acepte el mensaje de error
-				VistaConsulta.muestraDatosTabla(recuperado.getPersona()); 
-				VistaConsulta.setVisible(true);
+				Vista.muestraExitoError(recuperado.getMensaje());
+				return;
 			}
+			
+			VistaConsulta.eliminar();
+			// creamos un nuevo objeto para que desde la vista nos acepte el mensaje de error
+			VistaConsulta.muestraDatosTabla(recuperado.getPersona(), recuperado.getPagina(), recuperado.getLimiteTuplas(), recuperado.isActivoBtnAnterior(), recuperado.isActivoBtnSiguiente()); 
+			VistaConsulta.setVisible(true);
+			
 			return;
 		}
-	}	
+		if(b == VistaConsulta.btnAnterior)
+		{
+			ObjetoArrayConsulta recuperado = Modelo.consulta(1); //valor 1, puntoPartidaConsulta comenzará en las tuplas mostradas anteriormente
+			VistaConsulta.eliminar();
+			VistaConsulta.muestraDatosTabla(recuperado.getPersona(), recuperado.getPagina(), recuperado.getLimiteTuplas(), recuperado.isActivoBtnAnterior(), recuperado.isActivoBtnSiguiente()); 
+		}
+		if(b == VistaConsulta.btnSiguiente) 
+		{
+			ObjetoArrayConsulta recuperado = Modelo.consulta(2); //valor 2, puntoPartidaConsulta comenzará en el ultimo valor que se quedó a consultar 
+			VistaConsulta.eliminar();
+			VistaConsulta.muestraDatosTabla(recuperado.getPersona(), recuperado.getPagina(), recuperado.getLimiteTuplas(), recuperado.isActivoBtnAnterior(), recuperado.isActivoBtnSiguiente()); 
+		}
+	}
+	@Override
+	public void componentHidden(ComponentEvent e) {}
+	@Override
+	public void componentMoved(ComponentEvent e) {}
+	@Override
+	public void componentResized(ComponentEvent e) //Incrementamos el tamaño de la fuente dependiendo del tamaño del frame
+	{
+		Dimension dimensionActual, dimensionInicial;
+
+		dimensionInicial = Vista.dimensionInicial;
+		dimensionActual = Vista.getSize();
+
+		int incFuenteLetra = Modelo.calculoIncremento(dimensionInicial, dimensionActual);
+	
+		Vista.sizeFuenteLetra(incFuenteLetra);
+	}
+	@Override
+	public void componentShown(ComponentEvent e) {}
 }
