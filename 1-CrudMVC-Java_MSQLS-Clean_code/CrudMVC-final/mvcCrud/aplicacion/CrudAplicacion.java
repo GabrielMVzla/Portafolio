@@ -10,15 +10,15 @@ public class CrudAplicacion
 
 	public static void main(String[] args) throws Throwable 
 	{
-		boolean estadoBD = false;
 		CrudVistaInicio vistaI = new CrudVistaInicio();
 		CrudVistaConsulta vistaConsulta = new CrudVistaConsulta(vistaI, false);
-		CrudModelo modelo = new CrudModelo(estadoBD);
+		CrudModelo modelo = new CrudModelo();
 
 		vistaI.Muestrate();
 
 		//si no ponemos parametros al sig objeto, todos serían independientes
-		CrudControlador Controlador = new CrudControlador(vistaI, modelo, vistaConsulta, modelo.getEstado());
+		CrudControlador Controlador = new CrudControlador(vistaI, modelo, vistaConsulta, modelo.isEstadoBDD());
+		//EstadoBDD desde para no ir e ir al modelo y BD desde controlador
 		
 		vistaI.setControlador(Controlador);
 		vistaConsulta.setControlador(Controlador);

@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.sql.SQLException;
 import javax.swing.JButton;
 
 import modelo.CrudModelo;
@@ -22,7 +21,7 @@ public class CrudControlador implements ActionListener, ComponentListener
 	private CrudModelo modelo;
 	private CrudVistaConsulta vistaConsulta;
 	private boolean estadoBD;
-	CrudVistaMensajes vistaPrintMensaje;
+	private CrudVistaMensajes vistaPrintMensaje;
 	
 	public CrudControlador(CrudVistaInicio vista, CrudModelo modelo, CrudVistaConsulta vistaConsulta, boolean estadoBD) 
 	{
@@ -36,21 +35,35 @@ public class CrudControlador implements ActionListener, ComponentListener
 	{
 		if(!estadoBD)
 		{
-			//la conexión solo la comprobó una vez, y eso te devolvió un valor, ahora solo preguntas siempre por ese valor
+			//la conexión solo la comprobó una vez, y eso te devolvió un valor, ahora solo preguntas siempre por ese valor, si quieres realizar una acción mostrará este msj hasta estar solucionado
 			vista.errorConexion(estadoBD);
 			return estadoBD;
 		}
 		return estadoBD;
 	}
-	//constantes para validaciones, estos mensajes son de los casos de exito para cada evento
-
+	
+	//Válida los datos que vengan desde la vista principal, desde la llamada dentro de actionPerformed, si no cumple con lo esperado 
+	//va a la vista donde se encuentran los tipos de errores (CrudVistaMensajes) y despliega el error en una ventana JDialog
+	private boolean validaDatosVista(ObjetoPersonaRFC datos, String desde)
+	{
+		String primerBarrera = vistaPrintMensaje.comprobacionError(datos, desde);
+		
+		if(!primerBarrera.equals("0"))
+		{				
+			vistaPrintMensaje.muestraExitoError(primerBarrera); //lanza msj de error en la vista
+			return false;
+		}
+		return true;
+	}
+	
+	//constantes para validaciones, estos mensajes son de los casos de exito para cada evento //tipo de error desed el SQL
 	private final String mensajeGuardado = "Haz GUARDADO correctamente",
 				 		 mensajeModificado = "Haz MODIFICADO correctamente",
 				 		 mensajeEliminado = "Haz ELIMINADO correctamente",
 				 		 mensajeRecuperado = "recuperado",
 				 		 mensajeConsultado = "consultado",			
 						 mensajeConsultadoUnico = "consultadoUnico";			
-	final String guardar = "guardar", recuperar = "recuperar", modificar = "modificar", eliminar = "eliminar", consultar = "consultar"; 
+	private final String guardar = "guardar", recuperar = "recuperar", modificar = "modificar", eliminar = "eliminar";//, consultar = "consultar"; //tipo de error donde no se cumple con las características que debe llevar tal campo
 
 	public void actionPerformed(ActionEvent evt)
 	{
@@ -71,7 +84,6 @@ public class CrudControlador implements ActionListener, ComponentListener
 		ObjetoArrayConsulta consultaRecuperada = null;
 		ObjetoMensajePersonaRFC msjPersonRecuperada = null;
 
-		
 		if(b == vista.btnGuardar)
 		{
 			if(!validaDatosVista(datos, guardar)) //negarlo quiere decir que no cumple
@@ -79,7 +91,7 @@ public class CrudControlador implements ActionListener, ComponentListener
 			
 			try {
 				recuperado = modelo.guarda(datos);
-			} catch (SQLException e) {}
+			} catch (Throwable e) {}
 
 			vistaPrintMensaje.muestraExitoError(recuperado); //lanza msj de error en la vista
 			
@@ -121,7 +133,7 @@ public class CrudControlador implements ActionListener, ComponentListener
 			try 
 			{
 				recuperado = modelo.modifica(datos);
-			} catch (Exception e) {}
+			} catch (Throwable e) {}
 			
 			vistaPrintMensaje.muestraExitoError(recuperado);
 			
@@ -140,7 +152,7 @@ public class CrudControlador implements ActionListener, ComponentListener
 			try 
 			{
 				recuperado = modelo.elimina(datos);
-			} catch (Exception e) {}
+			} catch (Throwable e) {}
 			
 			vistaPrintMensaje.muestraExitoError(recuperado);
 			
@@ -171,7 +183,7 @@ public class CrudControlador implements ActionListener, ComponentListener
 
 			return;
 		}
-		if(b == vistaConsulta.btnAnterior)
+		if(b == vistaConsulta.btnAnterior) //La escucha de otros eventos puede ser desde otra clase Controlador
 		{
 			consultaRecuperada = modelo.consulta(1); //valor 1, puntoPartidaConsulta comenzará en las tuplas mostradas anteriormente
 			vistaConsulta.eliminar();
@@ -198,7 +210,7 @@ public class CrudControlador implements ActionListener, ComponentListener
 			
 			try {
 				msjPersonRecuperada = modelo.consulta(vistaConsulta.txtBuscarRfc.getText());
-			} catch (SQLException e) {}
+			} catch (Throwable e) {}
 			//valor tipo String se sobrecarga en modelo
 			if(!msjPersonRecuperada.getMensaje().equals(mensajeConsultadoUnico))//si no es "recuperado" (msj esperado) lanzará una ventana de error desde la Vista
 			{
@@ -223,19 +235,7 @@ public class CrudControlador implements ActionListener, ComponentListener
 	
 		vista.sizeFuenteLetra(incFuenteLetra);
 	}
-	//Válida los datos que vengan desde la vista principal, si no cumple con lo esperado va a la vista donde se encuentran
-	//los tipos de errores (CrudVistaMensajes) y despliega el error en una ventana JDialog
-	private boolean validaDatosVista(ObjetoPersonaRFC datos, String desde)
-	{
-		String primerBarrera = vistaPrintMensaje.comprobacionError(datos, desde);
-		
-		if(!primerBarrera.equals("0"))
-		{				
-			vistaPrintMensaje.muestraExitoError(primerBarrera); //lanza msj de error en la vista
-			return false;
-		}
-		return true;
-	}
+
 	
 	@Override
 	public void componentShown(ComponentEvent e) {}

@@ -6,7 +6,7 @@ import objetos.ObjetoPersonaRFC;
 
 public class CrudVistaMensajes
 {	
-	final String guardar = "guardar", recuperar = "recuperar", modificar = "modificar", eliminar = "eliminar", consultar = "consultadoUnico"; 
+	private final String guardar = "guardar", recuperar = "recuperar", modificar = "modificar", eliminar = "eliminar";//, consultar = "consultadoUnico"; 
 
 	//Validaciones para Ventana de inicio
 	public String comprobacionError(ObjetoPersonaRFC datos, String desde)
@@ -56,7 +56,7 @@ public class CrudVistaMensajes
 			mensajeError = "La cantidad de carácteres es de \""+ rfcBusqueda.length() +"\" en el campo RFC busqueda (deben ser 10 caracteres)";
 
 		}
-		else if(!rfcBusqueda.matches("^[a-zA-Z]{4}[0-9]{6}?$")) //expresión regular [4 letras][6 dígitos]
+		else if(!rfcBusqueda.matches("^[a-zA-Z]{4}[0-9]{6}?$"))
 		{
 			mensajeError = "No se aceptan simbolos especiales y los primeros 4 carácteres del campo RFC busqueda deben ser letras";
 		}

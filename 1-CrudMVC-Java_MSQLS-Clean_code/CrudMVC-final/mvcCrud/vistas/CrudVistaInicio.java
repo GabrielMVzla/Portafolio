@@ -29,16 +29,16 @@ public class CrudVistaInicio extends JFrame
 {
 
 	private static final long serialVersionUID = 1L;
-	JPanel contentPane;
+
+	private JLabel lblRfc, lblNombre, lblEdad, lblIdciudad, lblCatalogoUsuarios;
+	private JPanel panel, panel_Form, panel_Encabezado;// , panel_1;
+
+	public JTextField txtRfc, txtNombre, txtEdad, txtIdCiudad;
+	public JButton btnGuardar, btnModificar, btnEliminar, btnConsultar,btnRecuperar;
 	public JMenuBar menuBar;
 	public JMenu mnOpciones;
 	public JMenuItem mntmSalir;
 	public Dimension dimensionInicial;
-	
-	JLabel lblRfc, lblNombre, lblEdad, lblIdciudad, lblCatalogoUsuarios;
-	public JTextField txtRfc, txtNombre, txtEdad, txtIdCiudad;
-	public JButton btnGuardar, btnModificar, btnEliminar, btnConsultar,btnRecuperar;
-	private JPanel panel_Form, panel_Encabezado;// , panel_1;
 
 //	public JLabel lblLblimagen;
 	
@@ -53,7 +53,7 @@ public class CrudVistaInicio extends JFrame
     {
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	
-    	setSize(new Dimension(679, 322));
+    	setSize(new Dimension(600, 325));
     	dimensionInicial = new Dimension(getSize());
 
     	setLocationRelativeTo(null);
@@ -81,15 +81,15 @@ public class CrudVistaInicio extends JFrame
 		mntmSalir = new JMenuItem("Salir");
 		mntmSalir.setHorizontalAlignment(SwingConstants.LEFT);
 		mnOpciones.add(mntmSalir);
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.GRAY);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		panel = new JPanel();
+		panel.setBackground(Color.GRAY);
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(panel);
+		panel.setLayout(new BorderLayout(0, 0));
 		
 		panel_Form = new JPanel();
 		panel_Form.setBackground(SystemColor.menu);
-		contentPane.add(panel_Form, BorderLayout.CENTER);
+		panel.add(panel_Form, BorderLayout.CENTER);
 		panel_Form.setLayout(new GridLayout(0, 3, 5, 5));
 		
 		lblRfc = new JLabel("  RFC");
@@ -148,7 +148,7 @@ public class CrudVistaInicio extends JFrame
 		panel_Encabezado = new JPanel();
 		panel_Encabezado.setBackground(SystemColor.menu);
 
-		contentPane.add(panel_Encabezado, BorderLayout.NORTH);
+		panel.add(panel_Encabezado, BorderLayout.NORTH);
 		
 		lblCatalogoUsuarios = new JLabel("Catálogo Usuarios");
 		lblCatalogoUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
@@ -201,18 +201,16 @@ public class CrudVistaInicio extends JFrame
 		setVisible(true);
 	}
 	
-
-
 	//Error cuando te quieres conectar a la BD
 	public void errorConexion(boolean errorValue) 
 	{
 		if(!errorValue)
 		{
-			JOptionPane.showMessageDialog(null, "Error al conectarse a la Base de Datos, Verifica los datos de conexión en \"CrudBD\" coincidan con tu tabla y reinicia el programa");
+			JOptionPane.showMessageDialog(null, "Sin conexión en la base de datos, Verifica los datos\nde conexión en \"CrudBD\" y reinicia el programa");
 		}
 	}
 		
-	final int sizeBaselblCatUsu = 16, sizeBaseComun = 11;
+	private final int sizeBaselblCatUsu = 16, sizeBaseComun = 11;
 	private JLabel lblRelleno1;
 	private JLabel lblRelleno2;
 //			  sizeBaselblRFC = sizeBaseComun, sizeBaselblNombre = sizeBaseComun, sizeBaselblEdad = sizeBaseComun, sizeBaselblIdCiudad = sizeBaseComun;

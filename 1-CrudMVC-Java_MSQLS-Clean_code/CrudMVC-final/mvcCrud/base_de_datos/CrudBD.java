@@ -18,10 +18,9 @@ public class CrudBD
 {
 	private Connection conexion;
 	private boolean estadoBD;
-	int indiceConsulta;
-	//private final int cantColumnasDatos = 4;
+	private int indiceConsulta;
 	
-	public CrudBD(boolean estadoBD) throws Throwable 
+	public CrudBD() throws Throwable 
 	{
 		indiceConsulta = 0;
 		try 
@@ -33,10 +32,9 @@ public class CrudBD
 		{
 			estadoBD = false;
 		}
-		this.estadoBD = estadoBD;
 
 	}
-	public boolean getEstado() //importante al momento de ejecutar el programa, si no se establece correctamente la conexion de aquí vamos a obtener ese valor
+	public boolean isEstadoBDD() //importante al momento de ejecutar el programa, si no se establece correctamente la conexion de aquí vamos a obtener ese valor
 	{
 		return estadoBD;
 	}
@@ -118,7 +116,6 @@ public class CrudBD
 
 			return new ObjetoMensajePersonaRFC("Error al tratar de recuperar los datos", null);
 		}
-		
 	}
 	
 	//MODIFICA LOS DATOS DEL USUARIO EN BASE A SU RFC
@@ -200,10 +197,9 @@ public class CrudBD
 		}
 		//el valor de 2 será por descarte (puntoPartidaConsulta == 2)
 			
-		if(indiceConsulta <= 0)//por si pasa a negativo por parte de la condición (puntoPartidaConsulta == 1), obtendrá desde 0
+		if(indiceConsulta == 0)//por si pasa a negativo por parte de la condición (puntoPartidaConsulta == 1), obtendrá desde 0
 		{
 			activoBtnAnterior = false;
-			indiceConsulta = 0;
 		}
 		
 		ArrayList<ObjetoPersonaRFC> devuelveDatos = new ArrayList<ObjetoPersonaRFC>(); //array de objetos, cada indice lleva la info de un renglón
@@ -231,14 +227,12 @@ public class CrudBD
 				idCiudad = rs.getInt(4);
 				devuelveDatos.add(new ObjetoPersonaRFC(rfc, nombre, edad, idCiudad));
 			}
-	
-			if(rs.isAfterLast()) //para saber que ya finalizó, si no te da la oportunidad de presionar siguiente en la vistaConsulta si termina en un número cerrado
-				
+			
+			if(rs.isAfterLast()) //para cuando la última tupla de la tabla termina en 20 no me de la oportunidad de dar siguiente sin mostrar nada
 				activoBtnSiguiente = false;
 			
 			if(contadorC < finalC)
 			{
-				indiceConsulta = inicioC;
 				proximoAnterior = true;
 				activoBtnSiguiente = false;
 			}

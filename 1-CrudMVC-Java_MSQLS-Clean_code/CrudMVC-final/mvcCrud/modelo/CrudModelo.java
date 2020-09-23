@@ -1,7 +1,5 @@
 package modelo;
 
-import java.sql.SQLException;
-
 import base_de_datos.CrudBD;
 import objetos.ObjetoArrayConsulta;
 import objetos.ObjetoPersonaRFC;
@@ -17,19 +15,19 @@ public class CrudModelo
 	//constantes para validaciones
 	final String guardar = "guardar", recuperar = "recuperar", modificar = "modificar", eliminar = "eliminar"; 
 	
-	public CrudModelo(boolean estadoBD) throws Throwable 
+	public CrudModelo() throws Throwable 
 	{
-		bd = new CrudBD(estadoBD);
-		this.estadoBD = bd.getEstado();
+		bd = new CrudBD();
+		this.estadoBD = bd.isEstadoBDD();
 	}
 
-	public boolean getEstado()
+	public boolean isEstadoBDD()
 	{
 		return estadoBD;
 	}
 	
 	//SALVA LA INFORMACIÓN DE USUARIO
-	public String guarda(ObjetoPersonaRFC datos) throws SQLException // devuelve Mensaje
+	public String guarda(ObjetoPersonaRFC datos) throws Throwable // devuelve Mensaje
 	{				
 		datos.setRfc(casteo(datos.getRfc())); //datos.RFC quien contiene el RFC pasa a mayúscula
 		nuevoMensaje = bd.guardado(datos);    //mensaje recuperado de la BDD
@@ -51,7 +49,7 @@ public class CrudModelo
 	}
 	
 	//MODIFICA LOS DATOS DEL USUARIO EN BASE A SU RFC
-	public String modifica(ObjetoPersonaRFC datos) throws SQLException 
+	public String modifica(ObjetoPersonaRFC datos) throws Throwable 
 	{					
 		datos.setRfc(casteo(datos.getRfc())); 
 		
@@ -66,7 +64,7 @@ public class CrudModelo
 	}
 	
 	//ELIMINA USUARIO DE LA TABLA BASE A SU RFC
-	public String elimina(ObjetoPersonaRFC datos) throws SQLException 
+	public String elimina(ObjetoPersonaRFC datos) throws Throwable 
 	{		
 		nuevoMensaje = bd.eliminado(datos);
 		
@@ -84,7 +82,7 @@ public class CrudModelo
 		return bd.tablaConsulta(puntoPartidaConsulta); //retornamos un objeto con un mensaje (si hay error o no) y un objeto donde están los datos de los usuarios
 	}
 	//Sobrecargado para dato especifico
-	public ObjetoMensajePersonaRFC consulta(String rfc) throws SQLException 
+	public ObjetoMensajePersonaRFC consulta(String rfc) throws Throwable 
 	{
 		return bd.tablaConsulta(rfc); //retornamos un objeto con un mensaje (si hay error o no) y un objeto donde están los datos de los usuarios
 	}

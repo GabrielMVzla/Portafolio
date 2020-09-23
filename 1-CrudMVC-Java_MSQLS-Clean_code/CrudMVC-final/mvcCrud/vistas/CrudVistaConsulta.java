@@ -26,14 +26,15 @@ public class CrudVistaConsulta extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private DefaultTableModel modelo;
-	private JPanel contentPane, panelBusqueda, panelTabla;
+	private JPanel panel, panelBusqueda, panelTabla;
 	private JTable table;
 	private JScrollPane scrollPane;
-	public JButton btnSiguiente, btnAnterior, btnBuscarRfc,btnConsultaTodo;
-	public JTextField txtBuscarRfc;
 	private JLabel lblBusquedarfc, lblPgina;
 	
-    public CrudVistaConsulta(CrudVistaInicio vista, boolean modal)
+	public JButton btnSiguiente, btnAnterior, btnBuscarRfc,btnConsultaTodo;
+	public JTextField txtBuscarRfc;
+
+	public CrudVistaConsulta(CrudVistaInicio vista, boolean modal)
     {
         super(vista, modal);             
         
@@ -50,29 +51,24 @@ public class CrudVistaConsulta extends JDialog {
     private void inicializarComponentes()
 	{
     	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.menu);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+    	panel = new JPanel();
+    	panel.setBackground(SystemColor.menu);
+    	panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(panel);
 		
 		modelo = new DefaultTableModel();
-		contentPane.setLayout(new BorderLayout(5, 5));
+		panel.setLayout(new BorderLayout(5, 5));
 		
 		panelTabla = new JPanel();
 		panelTabla.setBackground(SystemColor.menu);
-		contentPane.add(panelTabla);
+		panel.add(panelTabla);
 		panelTabla.setLayout(new BorderLayout(5, 5));
 		
 		scrollPane = new JScrollPane();
 		panelTabla.add(scrollPane, BorderLayout.CENTER);
 		table = new JTable(modelo);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"No", "RFC", "Nombre", "Edad", "ID Ciudad"
-			}
-		));
+		estableceModel();
+		
 		table.getColumnModel().getColumn(0).setPreferredWidth(15);
 		scrollPane.setViewportView(table);
 		
@@ -96,7 +92,7 @@ public class CrudVistaConsulta extends JDialog {
 		
 		panelBusqueda = new JPanel();
 		panelBusqueda.setBackground(SystemColor.menu);
-		contentPane.add(panelBusqueda, BorderLayout.NORTH);
+		panel.add(panelBusqueda, BorderLayout.NORTH);
 		panelBusqueda.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		btnConsultaTodo = new JButton("Consulta General");
@@ -113,10 +109,22 @@ public class CrudVistaConsulta extends JDialog {
 		btnBuscarRfc = new JButton("Buscar");
 		panelBusqueda.add(btnBuscarRfc);
 	}
+    private void estableceModel() 
+    {
+       	table.setModel(new DefaultTableModel( 
+    			new Object[][] {
+    			},
+    			new String[] {
+    				"No", "RFC", "Nombre", "Edad", "ID Ciudad"
+    			}
+    		));
+    }
 	
     public void muestraDatosTabla(ArrayList<ObjetoPersonaRFC> datosPersona, int inicioPagina, int limiteTuplas, boolean activoBtnAnterior, boolean activoBtnSiguiente) //pintamos los datos de la tabla
 	//cada indice contiene un renglón con 4 columnas de la info de un registro
 	{   
+    	estableceModel();//nueva llamada al método que crea objeto modelo ya que lanzaba unos errores en consola, establecía un índice límite y si se superaba lanzaba errores en consola
+    	
 		String rfc = "", nombre = "";
 		int edad = -1, idCiudad = -1;
 		int tupla = inicioPagina;
@@ -126,6 +134,7 @@ public class CrudVistaConsulta extends JDialog {
 		btnSiguiente.setEnabled(activoBtnSiguiente);
 		
 		lblPgina.setForeground(Color.black);
+		lblPgina.setText("Página " + inicioPagina);
 		
 		if(!activoBtnAnterior)
 		{
@@ -137,8 +146,6 @@ public class CrudVistaConsulta extends JDialog {
 			lblPgina.setText("Última página");
 			lblPgina.setForeground(Color.RED);
 		}
-		else
-			lblPgina.setText("Página " + inicioPagina);
 		
 		for (int i = 0; i < datosPersona.size(); i++) //for simplemente desglosa el array de objetos y lo añade a la tabla de esta vista  
 		{
@@ -156,13 +163,8 @@ public class CrudVistaConsulta extends JDialog {
     public void muestraDatosTabla(ObjetoPersonaRFC datosPersona) //pintamos los datos de la tabla
     //cada indice contiene un renglón con 4 columnas de la info de un registro
     {   
-    	table.setModel(new DefaultTableModel( //nuevo objeto modelo ya que lanzaba unos errores en consola
-    			new Object[][] {
-    			},
-    			new String[] {
-    				"No", "RFC", "Nombre", "Edad", "ID Ciudad"
-    			}
-    		));
+    	estableceModel();
+    	
 		lblPgina.setText("Primer página");
 		lblPgina.setForeground(Color.RED);
     	
