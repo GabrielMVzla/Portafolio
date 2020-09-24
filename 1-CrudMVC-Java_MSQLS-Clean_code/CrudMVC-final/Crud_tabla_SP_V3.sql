@@ -27,7 +27,6 @@ CREATE PROCEDURE altaPersona
 (@rfc varchar(10), @nombre varchar(50), @edad int, @idCiudad int)
 as
 begin
-
 	--por motivos de integridad aunque intentes registrar 2 personas con el mismo PK (RFC) el sistema no te lo
 	--permitirá mostrando un mensaje, sin embargo al hacerlo de esta manera el mensaje que le digo que muestre
 	--al usuario sea más entendible a diferencia del por default
