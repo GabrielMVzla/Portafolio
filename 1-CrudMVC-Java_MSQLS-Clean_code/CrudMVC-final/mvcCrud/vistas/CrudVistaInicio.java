@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.CrudControlador;
+import objetos.ObjetoMensajePersonaRFC;
 import objetos.ObjetoPersonaRFC;
 
 import javax.swing.JLabel;
@@ -32,13 +33,13 @@ public class CrudVistaInicio extends JFrame
 
 	private JLabel lblRfc, lblNombre, lblEdad, lblIdciudad, lblCatalogoUsuarios;
 	private JPanel panel, panel_Form, panel_Encabezado;// , panel_1;
+	private JTextField txtRfc, txtNombre, txtEdad, txtIdCiudad;
+	private Dimension dimensionInicial;
 
-	public JTextField txtRfc, txtNombre, txtEdad, txtIdCiudad;
 	public JButton btnGuardar, btnModificar, btnEliminar, btnConsultar,btnRecuperar;
 	public JMenuBar menuBar;
 	public JMenu mnOpciones;
 	public JMenuItem mntmSalir;
-	public Dimension dimensionInicial;
 
 //	public JLabel lblLblimagen;
 	
@@ -156,6 +157,16 @@ public class CrudVistaInicio extends JFrame
 		panel_Encabezado.add(lblCatalogoUsuarios);
 	}
 	
+	public void llenaDatos(ObjetoMensajePersonaRFC msjPersonRecuperada) 
+	{
+		txtNombre.setText(msjPersonRecuperada.getDatos().getNombre());
+		txtEdad.setText(String.valueOf(msjPersonRecuperada.getDatos().getEdad()));
+		txtIdCiudad.setText(String.valueOf(msjPersonRecuperada.getDatos().getIdCiudad()));
+	}
+	public Dimension getDimensionInicial()
+	{
+		return dimensionInicial;
+	}
 	//como los objetos están en la vista, desed este método recuperamos tales datos
 	public ObjetoPersonaRFC datos()
 	{

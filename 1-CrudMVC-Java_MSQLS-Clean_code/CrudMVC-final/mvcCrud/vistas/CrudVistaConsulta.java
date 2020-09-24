@@ -30,9 +30,9 @@ public class CrudVistaConsulta extends JDialog {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JLabel lblBusquedarfc, lblPgina;
+	private JTextField txtBuscarRfc;
 	
 	public JButton btnSiguiente, btnAnterior, btnBuscarRfc,btnConsultaTodo;
-	public JTextField txtBuscarRfc;
 
 	public CrudVistaConsulta(CrudVistaInicio vista, boolean modal)
     {
@@ -109,6 +109,15 @@ public class CrudVistaConsulta extends JDialog {
 		btnBuscarRfc = new JButton("Buscar");
 		panelBusqueda.add(btnBuscarRfc);
 	}
+	public void vaciaaRfc() 
+	{
+		txtBuscarRfc.setText("");
+	}
+	public String getRfc() 
+	{
+		return txtBuscarRfc.getText();
+	}
+    
     private void estableceModel() 
     {
        	table.setModel(new DefaultTableModel( 
@@ -181,7 +190,7 @@ public class CrudVistaConsulta extends JDialog {
 			};
 		((DefaultTableModel) table.getModel()).addRow(datos1); //se agregan al componente tabla	
     }
-	public void eliminar() //para que no se apilen con el repintado cuando se vuelve a consultar
+	public void eliminarDatosTablas() //para que no se apilen con el repintado cuando se vuelve a consultar
 	{
 	    DefaultTableModel tb = (DefaultTableModel) table.getModel();
 	    int a = table.getRowCount()-1;
@@ -190,6 +199,8 @@ public class CrudVistaConsulta extends JDialog {
 	    {
 	    	tb.removeRow(tb.getRowCount()-1);
 	    }
+	    
+	    
 	}
 	
 	public void setControlador(CrudControlador c)

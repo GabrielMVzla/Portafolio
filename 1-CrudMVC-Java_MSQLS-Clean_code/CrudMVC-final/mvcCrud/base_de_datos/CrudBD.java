@@ -34,6 +34,7 @@ public class CrudBD
 		}
 
 	}
+	
 	public boolean isEstadoBDD() //importante al momento de ejecutar el programa, si no se establece correctamente la conexion de aquí vamos a obtener ese valor
 	{
 		return estadoBD;

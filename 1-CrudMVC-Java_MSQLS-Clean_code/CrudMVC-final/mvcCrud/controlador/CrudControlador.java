@@ -119,9 +119,7 @@ public class CrudControlador implements ActionListener, ComponentListener
 				return;
 			}
 			
-			vista.txtNombre.setText(msjPersonRecuperada.getDatos().getNombre());
-			vista.txtEdad.setText(String.valueOf(msjPersonRecuperada.getDatos().getEdad()));
-			vista.txtIdCiudad.setText(String.valueOf(msjPersonRecuperada.getDatos().getIdCiudad()));
+			vista.llenaDatos(msjPersonRecuperada);
 			
 			return;
 		}
@@ -175,10 +173,10 @@ public class CrudControlador implements ActionListener, ComponentListener
 				return;
 			}
 			
-			vistaConsulta.eliminar();
+			vistaConsulta.eliminarDatosTablas();
 			// creamos un nuevo objeto para que desde la vista nos acepte el mensaje de error
 			vistaConsulta.muestraDatosTabla(consultaRecuperada.getPersona(), consultaRecuperada.getPagina(), consultaRecuperada.getLimiteTuplas(), consultaRecuperada.isActivoBtnAnterior(), consultaRecuperada.isActivoBtnSiguiente()); 
-			vistaConsulta.txtBuscarRfc.setText("");
+			vistaConsulta.vaciaaRfc();
 			vistaConsulta.setVisible(true);
 
 			return;
@@ -186,30 +184,28 @@ public class CrudControlador implements ActionListener, ComponentListener
 		if(b == vistaConsulta.btnAnterior) //La escucha de otros eventos puede ser desde otra clase Controlador
 		{
 			consultaRecuperada = modelo.consulta(1); //valor 1, puntoPartidaConsulta comenzará en las tuplas mostradas anteriormente
-			vistaConsulta.eliminar();
+			vistaConsulta.eliminarDatosTablas();
 			vistaConsulta.muestraDatosTabla(consultaRecuperada.getPersona(), consultaRecuperada.getPagina(), consultaRecuperada.getLimiteTuplas(), consultaRecuperada.isActivoBtnAnterior(), consultaRecuperada.isActivoBtnSiguiente()); 
 			return;
 		}
 		if(b == vistaConsulta.btnSiguiente) 
 		{
 			consultaRecuperada = modelo.consulta(2); //valor 2, puntoPartidaConsulta comenzará en el ultimo valor que se quedó a consultar 
-			vistaConsulta.eliminar();
+			vistaConsulta.eliminarDatosTablas();
 			vistaConsulta.muestraDatosTabla(consultaRecuperada.getPersona(), consultaRecuperada.getPagina(), consultaRecuperada.getLimiteTuplas(), consultaRecuperada.isActivoBtnAnterior(), consultaRecuperada.isActivoBtnSiguiente()); 
 			return;
 		}
 		if(b == vistaConsulta.btnBuscarRfc) 
 		{
-			String primerBarrera = vistaPrintMensaje.comprobacionError(vistaConsulta.txtBuscarRfc.getText()); //verifica en método sobrecargado
+			String primerBarrera = vistaPrintMensaje.comprobacionError(vistaConsulta.getRfc()); //verifica en método sobrecargado
 			
 			if(!primerBarrera.equals("0")) //negarlo quiere decir que no cumple
 			{
 				vistaPrintMensaje.muestraExitoError(primerBarrera);
-
 				return;
 			}
-			
 			try {
-				msjPersonRecuperada = modelo.consulta(vistaConsulta.txtBuscarRfc.getText());
+				msjPersonRecuperada = modelo.consulta(vistaConsulta.getRfc());
 			} catch (Throwable e) {}
 			//valor tipo String se sobrecarga en modelo
 			if(!msjPersonRecuperada.getMensaje().equals(mensajeConsultadoUnico))//si no es "recuperado" (msj esperado) lanzará una ventana de error desde la Vista
@@ -217,9 +213,9 @@ public class CrudControlador implements ActionListener, ComponentListener
 				vistaPrintMensaje.muestraExitoError(msjPersonRecuperada.getMensaje());
 				return;
 			}
-			vistaConsulta.eliminar();
+			vistaConsulta.eliminarDatosTablas();
 			vistaConsulta.muestraDatosTabla(msjPersonRecuperada.getDatos()); 
-			vistaConsulta.txtBuscarRfc.setText("");
+			vistaConsulta.vaciaaRfc();
 			return;
 		}
 	}
@@ -227,8 +223,8 @@ public class CrudControlador implements ActionListener, ComponentListener
 	public void componentResized(ComponentEvent e) //Incrementamos el tamaño de la fuente dependiendo del tamaño del frame
 	{
 		Dimension dimensionActual, dimensionInicial;
-
-		dimensionInicial = vista.dimensionInicial;
+		
+		dimensionInicial = vista.getDimensionInicial();
 		dimensionActual = vista.getSize();
 
 		int incFuenteLetra = vista.calculoIncremento(dimensionInicial, dimensionActual);
